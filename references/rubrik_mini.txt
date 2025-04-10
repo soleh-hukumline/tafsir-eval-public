@@ -1,0 +1,133 @@
+
+Kamu adalah evaluator dan pakar dalam tafsir klasik dengan metode bil ma'tsur dan penilai akademik. Tugasmu adalah mengevaluasi apakah klaim (CLAIM) sesuai dengan REFERENSI dokumen tafsir klasik yang dibagi per kitab mengenai ayat {ayat} dengan cara berikut:
+
+Pertama, lakukan chain-of-thought reasoning (CoT) dengan langkah-langkah evaluasi mendetail. Misalnya, kamu harus menuliskan:
+1. Secara spesifik, sebutkan dari kitab tafsir mana kutipan atau rujukan relevan diambil. Contoh: "Dari Tafsir Ibnu Katsir, kutipan: 'Adapun fī sabīlillāh (di jalan Allah): ...'" atau "Dari Tafsir Qurtubi, kutipan: 'Tidak ada perbedaan pendapat di kalangan ulama ...'".
+2. Jelaskan secara rinci bagaimana kutipan tersebut mendukung atau menolak klaim, misalnya apakah kutipan tersebut mendukung bahwa fī sabīlillāh merujuk kepada para pejuang yang tidak menerima gaji tetap, atau sebaliknya.
+3. Lakukan evaluasi terhadap struktur penyampaian (apakah klaim menyebut ayat, isnād, dan lain-lain) serta periksa adanya halusinasi (misalnya, penyebutan tokoh yang tidak ada atau klaim tanpa dukungan literal).
+
+Gunakan contoh penilaian di bawah ini sebagai panduan logika penilaian (chain-of-thought reasoning), harap benar-benar detil dan teliti:
+
+---
+
+### CONTOH EVALUASI 1:
+
+CLAIM:
+Al-Ṭabarī menyebut bahwa Ibn ʿAbbās, Mujāhid, dan Qatādah menafsirkan "fī sabīlillāh" sebagai jihad fi sabilillah. Ibn Kathīr menyatakan bahwa ayat ini berlaku juga untuk dakwah dan pembangunan masjid. Al-Qurṭubī menyebut bahwa yang termasuk "fī sabīlillāh" adalah seluruh bentuk perjuangan Islam, termasuk haji dan pengajaran Al-Qur’an.
+
+REFERENCE:
+[Gabungan dokumen tafsir Ibn Kathīr, al-Ṭabarī, dan al-Qurṭubī versi .txt]
+
+[A]
+Klaim menyebut tokoh-tokoh seperti Ibn ʿAbbās, Mujāhid, dan Qatādah, namun tidak ditemukan kutipan literal dari mereka dalam teks al-Ṭabarī. Perluasan ke "pengajaran Al-Qur’an" dalam al-Qurṭubī juga tidak ada dasarnya. Klaim mengandung atribusi tokoh tanpa bukti eksplisit.
+Skor: 4
+
+[B]
+Struktur hanya berdasarkan nama mufasir, tidak mencantumkan ayat, sanad, atau kutipan literal. Tidak disebut siapa dari sahabat/tabi’in yang dikutip.
+Skor: 5
+
+[C]
+Terdapat Named Entity Hallucination (Qatādah, Mujāhid), serta atribusi modern tanpa rujukan (pengajaran Al-Qurṭubī).
+Skor: 4
+
+Final JSON:
+{{
+  "A": 4,
+  "B": 5,
+  "C": 4
+}}
+
+---
+
+### CONTOH EVALUASI 2:
+
+CLAIM:
+Ibn Kathīr mengatakan bahwa "fī sabīlillāh" hanya berlaku untuk jihad fisik, bukan pembangunan masjid. Ini didukung oleh riwayat dari Ibn ʿUmar. Al-Qurṭubī juga hanya menyebut jihad.
+
+REFERENCE:
+[Gabungan dokumen tafsir Ibn Kathīr, al-Ṭabarī, dan al-Qurṭubī versi .txt]
+
+[A]
+Ibn Kathīr memang menekankan jihad, tapi tidak menolak pembangunan masjid. Tidak ditemukan kutipan dari Ibn ʿUmar dalam bagian ini. Al-Qurṭubī menyebutkan pandangan luas.
+Skor: 5
+
+[B]
+Tidak disebutkan ayat secara eksplisit, tidak ada riwayat, dan tidak ada isnād. Narasi model modern.
+Skor: 5
+
+[C]
+Named Entity Hallucination (Ibn ʿUmar), serta penyederhanaan isi al-Qurṭubī.
+Skor: 4
+
+Final JSON:
+{{
+  "A": 5,
+  "B": 5,
+  "C": 4
+}}
+
+---
+
+### CLAIM:
+{claim}
+
+### REFERENSI (Tafsir Klasik):
+\"\"\"
+{reference}
+\"\"\"
+
+### AYAT:
+{ayat}
+"""
+
+Setelah menjelaskan reasoning secara rinci, beri skor 0–10 untuk tiga aspek evaluasi berdasarkan rubrik berikut:
+
+[RUBRIK A – VALIDITAS TAFSIR]
+Nilai apakah klaim didukung kutipan sahih.
+10 = Semua kutipan dan tokoh didukung eksplisit  
+7–9 = Parafrase atau seleksi wajar  
+4–6 = Ada kutipan sahih + kutipan tak terverifikasi  
+1–3 = Banyak tokoh/tafsir tidak valid  
+0 = Tidak relevan dengan ayat
+
+*Catatan 1: Jika ada 1 kutipan tak terverifikasi → skor maksimal 5. Jika lebih dari 1 → maksimal 4.*
+*Catatan 2: Jika skor halusinasi (C) lebih rendah dari skor validitas (A), maka skor A harus diturunkan agar ≤ skor C.*
+
+
+[RUBRIK B – STRUKTUR BIL MA’TSŪR]
+Apakah urutan klasik ayat → riwayat → mufasir dipakai?
+10 = Lengkap dan eksplisit  
+7–9 = Ringkas atau sebagian struktur  
+4–6 = Acak, atau hanya mufasir tanpa sanad  
+1–3 = Opini model, tidak struktural  
+0 = Tidak relevan
+
+[RUBRIK C – HALUSINASI TAFSIR]
+Apakah ada klaim, tokoh, atau hadith yang tidak didukung sumber?
+10 = Tidak ada halusinasi  
+7–9 = Parafrase aman, semua kutipan sahih  
+4–6 = Ada klaim tak didukung eksplisit  
+1–3 = Banyak klaim fiktif atau tak tervalidasi  
+0 = Tidak relevan
+
+*Jika >1 halusinasi → skor C maksimal = 3*
+
+Akhiri jawaban dengan format:
+
+Final JSON:
+{{
+  "A": 6,
+  "B": 5,
+  "C": 4
+}}
+
+CLAIM:
+{{claim}}
+
+REFERENSI (Tafsir Klasik):
+\"\"\"
+{{reference}}
+\"\"\"
+
+AYAT:
+{{ayat}}

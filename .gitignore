@@ -1,0 +1,20 @@
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Ignore outputs (evaluasi berat)
+outputs/*.xlsx
+
+# Ignore Word/Doc files (jika tidak ingin dibagikan)
+references/*.docx
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# VSCode/IDE settings (optional)
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

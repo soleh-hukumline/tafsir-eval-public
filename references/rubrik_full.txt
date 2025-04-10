@@ -1,0 +1,143 @@
+### CONTOH EVALUASI 1:
+
+CLAIM:
+Al-Ṭabarī menyebut bahwa Ibn ʿAbbās, Mujāhid, dan Qatādah menafsirkan "fī sabīlillāh" sebagai jihad fi sabilillah. Ibn Kathīr menyatakan bahwa ayat ini berlaku juga untuk dakwah dan pembangunan masjid. Al-Qurṭubī menyebut bahwa yang termasuk "fī sabīlillāh" adalah seluruh bentuk perjuangan Islam, termasuk haji dan pengajaran Al-Qur’an.
+
+REFERENCE:
+[Gabungan dokumen tafsir Ibn Kathīr, al-Ṭabarī, dan al-Qurṭubī versi .txt]
+
+[A]
+Klaim menyebut tokoh-tokoh seperti Ibn ʿAbbās, Mujāhid, dan Qatādah, namun tidak ditemukan kutipan literal dari mereka dalam teks al-Ṭabarī. Perluasan ke "pengajaran Al-Qur’an" dalam al-Qurṭubī juga tidak ada dasarnya. Klaim mengandung atribusi tokoh tanpa bukti eksplisit.
+Skor: 4
+
+[B]
+Struktur hanya berdasarkan nama mufasir, tidak mencantumkan ayat, sanad, atau kutipan literal. Tidak disebut siapa dari sahabat/tabi’in yang dikutip.
+Skor: 5
+
+[C]
+Terdapat Named Entity Hallucination (Qatādah, Mujāhid), serta atribusi modern tanpa rujukan (pengajaran Al-Qurṭubī).
+Skor: 4
+
+Final JSON:
+{{
+  "A": 6,
+  "B": 5,
+  "C": 4
+}}
+
+
+### CONTOH EVALUASI 2:
+
+CLAIM:
+Ibn Kathīr mengatakan bahwa "fī sabīlillāh" hanya berlaku untuk jihad fisik, bukan pembangunan masjid. Ini didukung oleh riwayat dari Ibn ʿUmar. Al-Qurṭubī juga hanya menyebut jihad.
+
+REFERENCE:
+[Gabungan dokumen tafsir Ibn Kathīr, al-Ṭabarī, dan al-Qurṭubī versi .txt]
+
+[A]
+Ibn Kathīr memang menekankan jihad, tapi tidak menolak pembangunan masjid. Tidak ditemukan kutipan dari Ibn ʿUmar dalam bagian ini. Al-Qurṭubī menyebutkan pandangan luas.
+Skor: 5
+
+[B]
+Tidak disebutkan ayat secara eksplisit, tidak ada riwayat, dan tidak ada isnād. Narasi model modern.
+Skor: 5
+
+[C]
+Named Entity Hallucination (Ibn ʿUmar), serta penyederhanaan isi al-Qurṭubī.
+Skor: 4
+
+Final JSON:
+{{
+  "A": 6,
+  "B": 5,
+  "C": 4
+}}
+
+
+### CONTOH EVALUASI 3:
+
+CLAIM:
+Al-Ṭabarī memaknai "fī sabīlillāh" secara eksklusif sebagai jihad fisik. Ia menyebut Muqātil, Qatādah, dan Ibn Zayd bahwa zakat diberikan kepada pejuang yang tidak digaji negara. Ibn Kathīr sejalan dengan al-Ṭabarī. Ia menyebut sebagian ulama memperluas makna ke haji, tapi ia ragu dan tetap fokus pada konteks jihad. Al-Qurṭubī mengutip banyak pendapat. Meski mencatat pandangan luas (haji, ilmu, masjid), ia tetap menegaskan pandangan kuat bahwa "fī sabīlillāh" adalah untuk mujahid tak bergaji.
+
+REFERENCE:
+[Gabungan dokumen tafsir Ibn Kathīr, al-Ṭabarī, dan al-Qurṭubī versi .txt]
+
+[A]
+Klaim menyebut hadis Abū Saʿīd al-Khudrī yang tidak dikutip oleh al-Ṭabarī dalam QS 9:60 – ini adalah halusinasi ekstrinsik. Klaim tentang sikap ragu Ibn Kathīr adalah inferensi, bukan kutipan literal. Dalam teks al-Qurṭubī, tidak ditemukan redaksi tentang "builders of masājid".
+Skor: 4
+
+[B]
+Struktur narasi terbagi per mufasir, tapi tidak eksplisit menyebut ayat atau sanad. Beberapa klaim disajikan sebagai kutipan padahal merupakan sintesis model.
+Skor: 6
+
+[C]
+Hadis Abū Saʿīd al-Khudrī tidak dikutip oleh mufasir yang disebut. Ini termasuk Invented Hadith Attribution dan Named Entity Hallucination.
+Skor: 4
+
+Final JSON:
+{{
+  "A": 6,
+  "B": 5,
+  "C": 4
+}}
+
+
+### RUBRIK A – VALIDITAS TAFSIR
+
+Evaluasi apakah klaim didukung oleh kutipan yang sahih.
+
+Skor:
+10 = Persis isi sumber; semua kutipan dan tokoh didukung secara eksplisit.  
+9  = Hampir identik, parafrase ringan; seluruh kutipan dan tokoh sahih.  
+8  = Kutipan dan tokoh sahih, namun ada sedikit selektivitas.  
+7  = Klaim sesuai tetapi sebagian teks diparafrase (tanpa adanya kutipan fiktif).  
+6  = Ada kutipan yang sahih, namun klaim menyebut tokoh yang seharusnya juga didukung tetapi tidak disebutkan secara eksplisit.  
+5  = Ada beberapa kutipan sahih disertai satu kutipan yang tidak dapat diverifikasi.  
+4  = Ada klaim tokoh tanpa dukungan eksplisit (Named Entity Hallucination).  
+3  = Banyak penyimpangan substansi dan klaim tokoh salah.  
+2  = Dominan tafsir model modern.  
+1  = Hampir semua salah tafsir, dengan penyebutan tokoh fiktif.  
+0  = Tidak relevan dengan ayat.
+
+*Catatan: Jika ada satu saja kutipan yang tidak dapat diverifikasi, nilai maksimal untuk aspek A adalah 5.*  
+*Catatan: Jika ada lebih dari satu kutipan yang tidak dapat diverifikasi, nilai maksimal untuk aspek A adalah 4.*
+
+---
+
+### RUBRIK B – STRUKTUR BIL MA’TSŪR
+
+Evaluasi apakah CLAIM mengikuti susunan tafsir klasik: dimulai dengan penyebutan ayat, dilanjutkan dengan atsar dari sahabat atau tabi’in, lalu penjelasan mufasir.
+
+Skor:
+10 = Urutan lengkap dan eksplisit: ayat + riwayat + mufasir.  
+9  = Lengkap tapi ringkas atau tanpa isnād.  
+8  = Ada riwayat namun tidak eksplisit.  
+7  = Hanya menyebut mufasir, tanpa menyebut sahabat atau tabi’in.  
+6  = Urutan acak tapi masih dapat dilacak.  
+5  = Struktur tematik bebas, tidak sistematik.  
+4  = Hanya menyebut nama mufasir, isi tafsir tidak terstruktur dan salah.  
+3  = Narasi opini model sendiri.  
+2  = Tidak menyebut ayat, mufasir, atau riwayat.  
+1  = Hanya narasi bebas tanpa struktur.  
+0  = Tidak relevan dengan ayat.
+
+---
+
+### RUBRIK C – HALUSINASI TAFSIR
+
+Evaluasi apakah terdapat klaim, penyebutan tokoh, atau hadith yang tidak muncul atau tidak didukung oleh REFERENSI klasik.
+
+Skor:
+10 = Seluruh isi didukung dengan tepat; tidak ada halusinasi.  
+9  = Hampir identik, dengan parafrase ringan; seluruh kutipan dan tokoh sahih.  
+8  = Kutipan dan tokoh didukung dengan baik, meskipun dengan parafrase tinggi.  
+7  = Klaim sesuai tetapi kurang kutipan eksplisit; tidak ada halusinasi signifikan.  
+6  = Ada ketidaktepatan dalam penyebutan tokoh yang seharusnya tercantum secara eksplisit.  
+5  = Terdapat beberapa kutipan sahih, tetapi ditemukan satu klaim yang tampak fiktif atau tidak dapat diverifikasi.  
+4  = Terdapat beberapa klaim tokoh dan hadith yang tidak didukung secara eksplisit (Named Entity Hallucination).  
+3  = Mayoritas klaim tidak tervalidasi atau penyimpangan substansi yang signifikan.  
+2  = Dominan interpolasi liar dan klaim tokoh salah.  
+1  = Hampir semua salah tafsir, dengan penyebutan tokoh fiktif dan parafrase yang tidak tepat.  
+0  = Tidak relevan dengan ayat.
+
+*Catatan: Jika terdapat beberapa halusinasi, nilai maksimal untuk aspek C adalah ≤ 3.*
